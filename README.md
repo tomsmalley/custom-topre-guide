@@ -147,11 +147,24 @@ dimensions:
 
 ```
 1.2 mm thick steel plate
-3/16 inch spacers
+3/16 inch (length) spacers
 PCB
 ```
 
+The PCB must be securely fastened to the plate - the force from keypresses (and
+the force of pressing the keycaps onto the sliders) is transferred to the PCB,
+not the plate. Making sure there are enough fastening points is also important
+to keep the housings firmly sitting on the PCB and holding the domes down, or
+you may end up with a "squishing" sound when keys are at the bottom of the
+stroke. Put some fasteners in the central sections of the keyboard to keep it
+rigid - copy Topre if in doubt.
+
 ## Hole sizes
+
+The sizes shown in this section are for Topre keyboards - not clones! Clones
+seem to be 14 x 14 mm square for 1U keys. They also require more consideration
+of fastener positions since they don't have the semicircular cutouts for bolts
+to pass through.
 
 Single unit wide key housings require a hole of size 14.6 mm x 14 mm, they are
 wider horizontally. The corners can be chamfered 1 mm along each edge, as Topre
@@ -183,7 +196,8 @@ You will need to modify a firmware quite substantially to get your keyboard
 working. Your initial choice depends on your chosen microcontroller and
 preferences in firmware. You need access to an ADC and some EEPROM memory in
 order to store calibration values: at least 2 bytes per key, if the stored
-values take 1 byte each (uint8_t).
+values take 1 byte each (uint8_t). Using something like a Teensy is perfectly
+fine, the initial work I did was using a Teensy 3.1/3.2.
 
 ## Basic read procedure
 
@@ -366,6 +380,10 @@ actuation depth minus this buffer value.
 Theoretically you could pipe the depth directly to an axis, be it a controller
 axis or something more interesting like analog mouse keys. Noisy readings mean
 you probably need to introduce a deadzone.
+
+With split keyboards it is important to share the depth information over
+the connection, instead of just sending keypresses digitally. This is so the
+master can handle analog commands on the slave.
 
 ## Example
 
