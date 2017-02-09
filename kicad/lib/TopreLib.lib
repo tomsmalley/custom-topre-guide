@@ -1,0 +1,19 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# ToprePad
+#
+DEF ~ToprePad TP 0 40 Y Y 1 F N
+F0 "TP" 75 -250 60 H I R CNN
+F1 "ToprePad" -25 -325 60 H I C CNN
+F2 "" 0 0 60 H I C CNN
+F3 "" 0 0 60 H I C CNN
+DRAW
+S 0 150 -125 -150 0 1 0 N
+X S 1 100 100 98 L 50 50 1 1 I
+X R 2 100 0 98 L 50 50 1 1 O
+X G 3 100 -100 98 L 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+#End Library

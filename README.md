@@ -18,7 +18,7 @@ for starting this all off.
     3. [Practical considerations](#practical-considerations)
         1. [Parasitic capacitance](#parasitic-capacitance)
         2. [Other notes](#other-notes)
-    4. KiCad files
+    4. [KiCad files](#kicad-files)
 2. [Hardware (case/plate)](#hardware-caseplate)
 3. [Firmware](#firmware)
     1. [Basic read procedure](#basic-read-procedure)
@@ -130,6 +130,13 @@ connected, ground them.
 I found it important to use a very fast amplifier, opting for the OPA350A.
 Cheaper options proved to be too slow, turning the voltage spike into more of a
 voltage mound, making reading unpredictable.
+
+## KiCad files
+
+See `kicad` folder, it contains an example switch footprint and schematic
+library file.
+
+![Topre footprint](topre-pad.png)
 
 # Hardware (case/plate)
 
