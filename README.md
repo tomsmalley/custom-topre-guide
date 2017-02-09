@@ -20,6 +20,8 @@ for starting this all off.
         2. [Other notes](#other-notes)
     4. [KiCad files](#kicad-files)
 2. [Hardware (case/plate)](#hardware-caseplate)
+    1. [Hole sizes](#hole-sizes)
+    2. [Warning about Realforce](#warning-about-realforce)
 3. [Firmware](#firmware)
     1. [Basic read procedure](#basic-read-procedure)
     2. [Normalisation](#normalisation)
@@ -49,7 +51,7 @@ range 0 ~ 6 pF (roughly). The strobe lines are just digital signals from a
 digital out pin of the microcontroller. The read lines are dealt with in the
 following schematic:
 
-![Schematic](schematic.png "Basic schematic")
+![Schematic](images/schematic.png "Basic schematic")
 
 Each read line is pulled to ground with an individual 22k resistor, and fed
 into an analog multiplexer. After selecting a read line on the multiplexer, the
@@ -136,19 +138,44 @@ voltage mound, making reading unpredictable.
 See `kicad` folder, it contains an example switch footprint and schematic
 library file.
 
-![Topre footprint](topre-pad.png)
+![Topre footprint](images/topre-pad.png)
 
 # Hardware (case/plate)
 
-The stackup is fairly simple, and is determined by the housing dimensions:
+The stackup is fairly simple, the spacer size is determined by the housing
+dimensions:
 
 ```
 1.2 mm thick steel plate
 3/16 inch spacers
 PCB
 ```
-TODO: hole sizes drawings, warn about Realforce control key rotation, dealing
-with clones, dome cutting.
+
+## Hole sizes
+
+Single unit wide key housings require a hole of size 14.6 mm x 14 mm, they are
+wider horizontally. The corners can be chamfered 1 mm along each edge, as Topre
+does.
+
+Double unit key housings (backspace, shift keys, ANSI enter key) should be 32.4
+mm x 14 mm. I made mine 32.6 mm but they are slightly too large. The bottom
+edge can have chamfers in the corners, like Topre does: around 3 mm along the
+bottom edge with a 30 degree angle.
+
+![Example DXF Screenshot](images/dxf-example.png "Example DXF Screenshot")
+
+See example-split-hhkb.dxf for example sizes (The double unit keys are too wide
+though, as I mention above).
+
+## Warning about Realforce
+
+Realforce keyboards (I don't know if this is true of all of them, but certainly
+the ANSI 55g 87u that I have) have a strange bottom left control key. The stem
+is rotated by 90 degrees, and so a housing which can hold this keycap must be
+rotated as well. Since they are not square this is a problem! If you want to
+support moving the control key around (swapping with alt, for example) both
+should be made 14.6 x 14.6 mm. The PCB will hold the housing when the keyboard
+is built.
 
 # Firmware
 
@@ -236,7 +263,7 @@ uint8_t normalise(strobe, read, uint8_t value):
 
 Repeated readings from the ADC for a single key might look something like this:
 
-![ADC Plot](adcplot.png "ADC Plot")
+![ADC Plot](images/adcplot.png "ADC Plot")
 
 This shows a full key press and release as the ADC reading crosses above the
 actuation depth, and later below the release depth. We are interested in
